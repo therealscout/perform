@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+    <title>
+        Safety Measurement System - Unsafe Driving BASIC (U.S. DOT# 286385)
+    </title>
+    <!--[if lte IE 8]>
+        <script src="/SMS/Scripts/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/SMS/Images/Icons/Browser/sms-logo_152px_Blu.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/SMS/Images/Icons/Browser/sms-logo_144px_Blu.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/SMS/Images/Icons/Browser/sms-logo_114px_Blu.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/SMS/Images/Icons/Browser/sms-logo_72px_Blu.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/SMS/Images/Icons/Browser/sms-logo_57px_Blu.png" />
+    <link rel="shortcut icon" href="/SMS/Images/Icons/Browser/sms-logo_32px.png" />
+    <link rel="icon" href="/SMS/Images/Icons/Browser/favicon.ico" type="image/x-icon">
+    <link href="/SMS/Fonts/FontFace_SourceSansPro.css" rel="stylesheet" type="text/css" />
+    <link href="/SMS/Style/Site.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/SMS/Style/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="/SMS/Style/jquery-ui.structure.css" rel="stylesheet" type="text/css" />
+    <link href="/SMS/Style/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
+
+    <link href="/SMS/Style/Carrier.css" rel="stylesheet" type="text/css" />
+    <link href="/SMS/Style/Charts.css" rel="stylesheet" type="text/css" />
+    <link href="/SMS/Style/EventTables.css" rel="stylesheet" type="text/css" />
+    <!--[if gte IE 9]><!-->
+    <!--<![endif]-->
+    <!--[if lte IE 8]>
+        <link href="/SMS/Style/Site_LTE_IE8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!--[if gte IE 9]>
+        <style type="text/css">
+            #BASICList li.InsOther, #BASICList li a {
+                filter: none;
+            }
+        </style>
+    <![endif]-->
+    <!--Responsve Style Sheets-->
+        <link href="/SMS/Style/responsive/mobileDisabled.css" rel="stylesheet" media="only screen and (max-width: 1107px)" />
+            <link href="/SMS/Style/responsive/1107.css" rel="stylesheet" media="only screen and
+            (max-width: 1107px)" />
+            <link href="/SMS/Style/responsive/915.css" rel="stylesheet" media="only screen and
+            (max-width: 915px)" />
+            <link href="/SMS/Style/responsive/759.css" rel="stylesheet" media="only screen and
+            (max-width: 759px)" />
+            <link href="/SMS/Style/responsive/599.css" rel="stylesheet" media="only screen and
+        (max-width: 599px)" />
+    <link href="/SMS/Style/Print.css" rel="stylesheet" media="print" />
+    <!--[if lte IE 8]>
+         <script src="/SMS/Scripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="/SMS/Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="/SMS/Scripts/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/SMS/Scripts/jquery.simplemodal.1.4.4.min.js" type="text/javascript"></script>
+    <script src="/SMS/Scripts/SMSGlobal.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var searchLookupURL = '/SMS/Search/ToolbarHint.aspx';
+    </script>
+
+    <!--[if lte IE 8]>
+    <script src="/SMS/Scripts/Charts/r2d3.js" charset="utf-8" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="/SMS/Scripts/Charts/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="/SMS/Scripts/Charts/barchart.js" type="text/javascript"></script>
+    <script src="/SMS/Scripts/Charts/percentilechart.js" type="text/javascript"></script>
+    <script src="/SMS/Scripts/Charts/linechart.js" type="text/javascript"></script>
+    <script src="/SMS/Scripts/Charts/chartscontroller.js" type="text/javascript"></script>
+        <script src="/SMS/Scripts/waypoints.min.js" type="text/javascript"></script>
+        <script src="/SMS/Scripts/PenaltyExpander.js" type="text/javascript"></script>
+        <script src="/SMS/Scripts/TableFunctions.js" type="text/javascript"></script>
+        <script src="/SMS/Scripts/EventTableLoader.js" type="text/javascript"></script>
+        <script src="/SMS/Scripts/TableSort.js" type="text/javascript"></script>
+        <script src="/SMS/Scripts/Charts/GraphTabs.js" type="text/javascript"></script>
+        <!--[if lte IE 8]>
+             <script type="text/javascript">
+                 animationTime = 0;
+             </script>
+        <![endif]-->
+    
+<script src="/SMS/Scripts/Analytics/entourage.js"></script>
+    <script type="text/javascript">
+        var userType = "Public";
+    </script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-48056947-1', 'dot.gov');
+    ga('set', 'dimension1', userType);
+    ga('send', 'pageview');
+</script>
+<script src="/SMS/Scripts/Analytics/dot_analytics.js"></script>
+        <style>
+            html {
+                display: none;
+            }
+        </style>
+        <script type="text/javascript">            if (self == top) document.documentElement.style.display = 'block'; else top.location = self.location; </script>
+    <script type="text/javascript">
+        //<![CDATA[
+        var usasearch_config = { siteHandle: "dot-fmcsa-csa" };
+
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "//search.usa.gov/javascripts/remote.loader.js";
+        document.getElementsByTagName("head")[0].appendChild(script);
+        //]]>
+    </script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserAlert"><div class="message">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</div></p>
+    <![endif]-->
+    <div id="loginTimeout" class="browserAlert" data-session-check="/SMS/Home/CheckLogin.aspx">
+        <div class="message">
+            For your protection, your login session will expire in <span class="ttl">0:00</span>,
+            do you wish <a class="extendSession" href="/SMS/Home/RefreshLogin.aspx">extend your session</a>
+            or <a class="logout" href="/SMS/Home/Logout.aspx?ReturnURL=%2FSMS%2FCarrier%2F286385%2FBASIC%2FUnsafeDriving.aspx">logout</a>?
+        </div>
+    </div>
+    <p id="skip-link">
+        <a href="#content-start" class="element-invisible element-focusable">Jump to content</a>
+    </p>
+    <div id="page-bg-container">
+    </div>
+    <div id="page-wrapper">
+        <div id="dot-header">
+            <div class="mode-ribbon">
+                <a href="http://www.dot.gov">
+                    <img src="/SMS/Images/Layout/dot_ribbon_logo.png" alt="d o t logo"><span class="dottext">
+                        United States Department of Transportation
+                    </span>
+                </a>
+                <ul class="mode-ribbon-links">
+                    <li>
+                        <a href="http://www.dot.gov/about">About DOT</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dot.gov/our-activities">Our Activities</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dot.gov/areas-of-focus">Areas of Focus</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="page">
+            <header>
+                <div id="fmcsa-header">
+                    <a href="http://www.fmcsa.dot.gov">
+                        <img src="/SMS/Images/Layout/fmcsa_logo.png" alt="FMCSA - Federal Motor Carrier Safety Adminstration" />
+                    </a>
+                    <div id="ai-login-pnl" class="public">
+                            <a href="/Login/Default.aspx?ReturnURL=/SMS/Carrier/286385/BASIC/UnsafeDriving.aspx">
+                                Login
+                            </a>
+                    </div>
+                    <form accept-charset="UTF-8" action="//search.usa.gov/search" id="search_form" target="_blank"
+                          method="get" class="usa-search">
+                        <input id="affiliate" name="affiliate" type="hidden" value="dot-fmcsa-csa" />
+                        <label for="query">
+                            Enter Search Term(s):
+                        </label>
+                        <input autocomplete="off" class="usagov-search-autocomplete" id="query" name="query"
+                               type="text" title="Enter Search Term(s):" />
+                        <input name="commit" type="submit" value="Search" />
+                    </form>
+                </div>
+                <div id="csa-header">
+                    <h1>
+                        <a href="https://csa.fmcsa.dot.gov">
+                            <img src="/SMS/Images/Layout/csa_logo.png" alt="CSA - Compliance, Safety, Accountability" />
+                        </a>
+                    </h1>
+                    <h2>
+                        Get Road Smart.
+                    </h2>
+                    <hr />
+                </div>
+                <div id="sms-header">
+                    <h1>
+                        <a href="/SMS/">
+                            <img src="/SMS/Images/Layout/sms_logo.png" alt="SMS - Safety Measurement System" />
+                            <img src="/SMS/Images/Layout/sms_logo_bw.png" alt="SMS - Safety Measurement System"
+                                 class="bw" />
+                        </a>
+                    </h1>
+                    <a class="mobileMenu" href="#menu">
+                        <img src="/SMS/Images/responsive/menu_white.png" />
+                    </a>
+                    <nav>
+                        <ul id="topMenu">
+                            <li>
+                                <a href="/">A&amp;I</a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://csa.fmcsa.dot.gov">CSA</a>
+                            </li>
+                            <li>
+                                <a  href="/SMS/">
+                                    SMS
+                                </a>
+                            </li>
+                                <li id="basics">
+                                    <a class="selected" href="/SMS/Carrier/286385/Overview.aspx">Overview</a>
+                                    <ul>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/UnsafeDriving.aspx">Unsafe Driving</a></li>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/CrashIndicator.aspx">Crash Indicator</a></li>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/HOSCompliance.aspx">HOS Compliance</a></li>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/VehicleMaint.aspx">Vehicle Maint.</a></li>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/DrugsAlcohol.aspx">Drugs/Alcohol</a></li>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/HMCompliance.aspx">HM Compliance</a></li>
+                                            <li><a href="/SMS/Carrier/286385/BASIC/DriverFitness.aspx">Driver Fitness</a></li>
+                                    </ul>
+                                </li>
+                                                            <li>
+                                    <a  href="/SMS/Search/Index.aspx">
+                                        Search
+                                    </a>
+                                </li>
+                            <li>
+                                <a class="" href="/SMS/Tools/Index.aspx">Tools</a>
+                                <ul>
+                                    <li><a href="/SMS/Tools/Downloads.aspx">Downloads</a></li>
+                                    <li><a href="/SMS/Tools/Reports.aspx">Reports</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a  href="/SMS/HelpCenter/Index.aspx" target="_blank">
+                                    Help<br />
+                                    Center
+                                </a>
+                            </li>
+                            <li id="nav-login-pnl">
+                                    <a href="/Login/Default.aspx?ReturnURL=/SMS/Carrier/286385/BASIC/UnsafeDriving.aspx">
+                                        Login
+                                    </a>
+                            </li>
+                        </ul>
+                        
+<form action="/SMS/Search/Index.aspx" method="post">        <label for="MCSearch" class="element-invisible">
+            Type Name, U.S. DOT#, MC# <span class="optional">and press enter to search</span>
+        </label>
+        <input name="MCSearch" type="text" list="dots" placeholder="Search Motor Carriers: Type Name, U.S. DOT#, MC#" />
+        <input type="submit" name="search" value="Search" class="element-invisible" />
+        <datalist id="dots">
+        </datalist>
+        <aside class="search-disclaimer"><h5>
+    Use of SMS Data/Information</h5>
+<p><h6>FAST Act of 2015:</h6></p>
+<p>
+Readers should not draw conclusions about a carrier's overall safety condition simply based on the data displayed in this system. Unless a motor carrier has received an UNSATISFACTORY safety rating under part 385 of title 49, Code of Federal Regulations, or has otherwise been ordered to discontinue operations by the Federal Motor Carrier Safety Administration, it is authorized to operate on the Nation's roadways.</p>
+<p><h6>Safety Measurement System:</h6></p>
+<p>
+    The data in the Safety Measurement System (SMS) is performance data used by the
+    Agency and Enforcement Community. A
+    <img src="https://ai.fmcsa.dot.gov/SMS/Images/Icons/prioritize_small.png" alt='Carrier may be prioritized for an intervention action and roadside inspection.'
+        class='prioritizeIcon' />
+    symbol, based on that data, indicates that FMCSA may prioritize a motor carrier
+    for further monitoring.
+</p>
+<p>
+    The
+    <img src="https://ai.fmcsa.dot.gov/SMS/Images/Icons/prioritize_small.png" alt='Carrier may be prioritized for an intervention action and roadside inspection.'
+        class='prioritizeIcon' />
+    symbol is not intended to imply any federal safety rating of the carrier pursuant
+    to 49 USC 31144. Readers should not draw conclusions about a carrier's overall safety
+    condition simply based on the data displayed in this system. Unless a motor carrier
+    in the SMS has received an UNSATISFACTORY safety rating pursuant to 49 CFR Part
+    385, or has otherwise been ordered to discontinue operations by the FMCSA, it is
+    authorized to operate on the nation's roadways.
+</p>
+<p>
+    Motor carrier safety ratings are available at <a href="http://safer.fmcsa.dot.gov"
+        target="_blank">http://safer.fmcsa.dot.gov</a> and motor carrier licensing and
+    insurance status are available at <a href="http://li-public.fmcsa.dot.gov" target="_blank">
+        http://li-public.fmcsa.dot.gov/</a>.
+</p></aside>
+</form>
+                    </nav>
+                </div>
+            </header>
+            <a id="content-start" class="element-invisible"></a>
+            
+<article id="carrierBody" class="carrier-data basic">
+    <section id="CarrierInfo">
+    <div id="basicInfo">
+        <div class="carrierName">
+            <h3>WORLEY &amp; OBETZ INC</h3>
+            <ul class="no-list">
+                <li id="dot-num-li">
+                    <label>
+                        U.S. DOT#:
+                    </label>
+                    286385
+                </li>
+            </ul>
+        </div>
+        <ul class="no-list">
+            <li>
+                <label>
+                    Address:
+                </label>
+                85 WHITE OAK RD
+                <br />
+                MANHEIM, PA 17545-0429
+            </li>
+            <li>
+                <label>
+                    Number of Vehicles:
+                </label>
+                88
+            </li>
+            <li>
+                <label>
+                    Number of Drivers:
+                </label>
+                71
+            </li>
+            <li>
+                <label>
+                    Number of Inspections:
+                </label>
+                69
+            </li>
+        </ul>
+    </div>
+        <br />
+    <div id="SafetyRating">
+        <h3>Safety Rating &amp; OOS Rates</h3>
+            <p class="data-source">
+                (As of 12/12/2016 updated
+                daily from <a target="_blank" href="http://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=286385#Inspections">
+                    SAFER
+                </a>)
+            </p>
+            <div id="Rating">SATISFACTORY</div>
+                <div id="RatingDate">
+                    (<label>Rating Date:</label>
+                    03/31/2008)
+                </div>
+            <h4>Out of Service Rates</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>OOS %</th>
+                        <th>National Avg %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Vehicle</th>
+                        <td>11.3</td>
+                        <td>20.3</td>
+                    </tr>
+                    <tr>
+                        <th>Driver</th>
+                        <td>1.4</td>
+                        <td>5.0</td>
+                    </tr>
+                    <tr>
+                        <th>Hazmat</th>
+                        <td>0.0</td>
+                        <td>3.9</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div id="LicensingAndInsurance">
+        <h3>Licensing and Insurance</h3>
+            <p class="data-source">
+                (As of 12/12/2016 updated
+                hourly from <a target="_blank" href="http://li-public.fmcsa.dot.gov/LIVIEW/pkg_carrquery.prc_carrlist?n_dotno=286385">
+                    L&amp;I
+                </a>)
+            </p>
+            <table>
+                <caption>
+                    Active For-Hire Authority
+                </caption>
+                <thead>
+                    <tr class="subHead">
+                        <th>Type </th>
+                        <th>Yes/No </th>
+                        <th>MC#/MX# </th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <th>
+                                Property
+                            </th>
+                                <td>Yes </td>
+                                <td>
+                                    MC-673190
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Passenger
+                            </th>
+                                <td>No </td>
+                                <td></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Household Goods
+                            </th>
+                                <td>No </td>
+                                <td></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Broker
+                            </th>
+                                <td>Yes </td>
+                                <td>
+                                    MC-673190
+                                </td>
+                        </tr>
+                </tbody>
+            </table>
+    </div>
+    <div class="clear">
+    </div>
+</section>
+
+
+
+        <aside id="smsPreview">
+            <a target="_blank" href="https://csa.fmcsa.dot.gov/SMSPreview/">
+                See how
+                the proposed enhancements impact carrier results. Visit the SMS Preview Website
+            </a>
+    </aside>
+<div id="BASICContainer">
+    <aside id="basic-toolbox-container">
+        <ul id="basic-toolbox">
+            <li class="profile"><a href="/SMS/Carrier/286385/CompleteProfile.aspx">Complete SMS Profile</a></li>
+            <li class="contact">
+                <a href="https://csa.fmcsa.dot.gov/CSA_Feedback.aspx" target="_blank">
+                    Contact Us
+                </a>
+            </li>
+                <li class="downloads">
+                    <a href="#Downloads" class="modalContentLink" data-width="330" data-height="210">Downloads</a>
+                </li>
+            <li class="print">
+                <a href="/SMS/Carrier/286385/BASIC/UnsafeDriving.aspx?print=true" target="_blank">
+                    Print
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <section id="BASICs">
+        <aside id="BASICStatusIG">
+            <a href="/SMS/Home/SMSToCrash.aspx" target="_blank">How does SMS relate to crashes?</a>
+        </aside>
+        <h2>
+            BASIC Status <span class="display-type">
+                (Public Property Carrier View)
+                
+                <a class="measureDetail" href="#">
+                    <img src="/SMS/Images/Icons/q.png" alt="FAST Act of 2015" title="Pursuant to the FAST Act of 2015, the
+property carrier safety data available to 
+the public includes inspection and crash 
+data, investigation results, and measures
+for all public BASICs. Property carriers can
+log in to view their own complete SMS
+results. All safety data on passenger
+carriers remains available to the public." />
+                </a>
+            </span>
+        </h2>
+        <p class="basicSubtitle">
+            <span class="basicName">Behavior Analysis &amp; Safety Improvement Categories (BASICs)</span>
+            <span class="basicDates">
+                Based on a 24-month record ending November 25, 2016
+            </span>
+        </p>
+        <ul id="BASICList" class="public">
+                <li class="selected UnsafeDriving">
+                    <a href="/SMS/Carrier/286385/Overview.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/UnsafeDriving.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/UnsafeDrivingBW.png" alt="" />
+                                                <span class="basicName">Unsafe Driving</span>
+                    </a>
+                </li>
+                <li class=" CrashIndicator">
+                    <a href="/SMS/Carrier/286385/BASIC/CrashIndicator.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/CrashIndicator.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/CrashIndicatorBW.png" alt="" />
+                        <span class="notPublic">Not Public</span>                        <span class="basicName">Crash Indicator</span>
+                    </a>
+                </li>
+                <li class=" HOSCompliance">
+                    <a href="/SMS/Carrier/286385/BASIC/HOSCompliance.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/HOSCompliance.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/HOSComplianceBW.png" alt="" />
+                                                <span class="basicName">Hours-of-Service Compliance</span>
+                    </a>
+                </li>
+                <li class=" VehicleMaint">
+                    <a href="/SMS/Carrier/286385/BASIC/VehicleMaint.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/VehicleMaint.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/VehicleMaintBW.png" alt="" />
+                                                <span class="basicName">Vehicle Maintenance</span>
+                    </a>
+                </li>
+                <li class=" DrugsAlcohol">
+                    <a href="/SMS/Carrier/286385/BASIC/DrugsAlcohol.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/DrugsAlcohol.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/DrugsAlcoholBW.png" alt="" />
+                                                <span class="basicName">Controlled Substances and Alcohol</span>
+                    </a>
+                </li>
+                <li class=" HMCompliance">
+                    <a href="/SMS/Carrier/286385/BASIC/HMCompliance.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/HMCompliance.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/HMComplianceBW.png" alt="" />
+                        <span class="notPublic">Not Public</span>                        <span class="basicName">Hazardous Materials Compliance</span>
+                    </a>
+                </li>
+                <li class=" DriverFitness">
+                    <a href="/SMS/Carrier/286385/BASIC/DriverFitness.aspx">
+                        <img class="basicIcon" src="/SMS/images/Icons/BASICs/DriverFitness.png" alt="" />
+                        <img class="basicIcon bw" src="/SMS/images/Icons/BASICs/DriverFitnessBW.png" alt="" />
+                                                <span class="basicName">Driver Fitness</span>
+                    </a>
+                </li>
+        </ul>
+            <p style="margin-left: 10px; margin-bottom: 0;">
+                Select a BASIC icon above to get details, or view your <a href="/SMS/Carrier/286385/CompleteProfile.aspx?BASICUrlName=UnsafeDriving">Complete SMS Profile</a>.
+            </p>
+    </section>
+</div>
+
+    <div id="BASICBody">
+        <div id="BASICOverviewContainer">
+                <div id="resultData" data-measure="0.07" data-percentile="" data-threshold="60">
+                </div>
+            <section class="BASICOverview">
+                <h2 class="single">
+                    <label>
+                        BASIC:
+                    </label>
+                    <span class="basicName">Unsafe Driving</span>
+                </h2>
+                <div class="overviewBody">
+                    <a class="moreInfo modalContentLink" href="#moreInfo" data-width="550" data-height="584">
+                        More Info
+                    </a>
+                        <br>
+                        <h3>On-Road Performance</h3>
+                        <label>
+                            Measure:
+                        </label>
+0.07 <a class="measureDetail"
+                                                                                   href="#InspectionHistory">
+                            <img src="/SMS/Images/Icons/q.png" alt="How is the measure calculated?" title="How is the measure calculated?" />
+                        </a>
+                        <p>Safety Event Group: No Safety Event Group</p>
+                            <h3>Investigation Results</h3>
+                            <p class="invResults">
+                                No Acute/Critical Violations Discovered
+                            </p>
+                </div>
+            </section>
+            <section id="BASICGraphs">
+                <a href="#" class="exColLnk">
+                    <img src="/SMS/Images/Icons/graphExpand.png" alt="Expand Graph" />
+                </a>
+                <ul class="graphMenu">
+                        <li data-anchor="measurePnl" class="selected"><a href="/SMS/Carrier/286385/BASIC/UnsafeDriving/MeasureHistoryGraph.aspx?role=Public">Carrier Measure Over Time</a></li>
+                        <li data-anchor="inspectionResultsPnl"><a href="/SMS/Carrier/286385/BASIC/UnsafeDriving/CarrierActivityGraph.aspx">Inspection Results</a></li>
+                </ul>
+                    <div class="graphContainer">
+<div id="measurePnl" class="graphPnl" data-not-bound="true" style="display: block;">
+    <div class="graphContent">
+        <h3>Carrier Measure Over Time</h3>
+        <ul class="key">
+            <li class="T">
+                <span style="background-color: #4db9da" class="swatch"></span><span class="val">Trends</span>
+            </li>
+            <li class="H" style="display: none;">
+                <span style="background-color: #949b9f" class="swatch">
+                </span><span class="val">History</span>
+            </li>
+        </ul>
+        <p class="short-desc">
+            This graph displays a carrier’s measure based on 24 months of on-road performance. Zero indicates the best performance. 
+            To see how the measure is calculated <a href="#inspDetail" class="inspDetailLink">click here</a>.
+            To see how the measure relates to percentile <a href="#" data-index="1" class="graphTabLink">click here</a>.
+            <a href="#" class="expandLink">Expand</a> for more information.
+        </p>
+        <select class="view">
+            <option value="M,Q,S" selected>Monthly</option>
+            <option value="Q,S">Quarterly</option>
+            <option value="S">Semi-Annually</option>
+        </select>
+        <select class="focus">
+            <option value="T" selected>Trends</option>
+            <option value="H">History</option>
+            <option value="T,H">Both</option>
+        </select>
+        <div class="graphBody" data-expand-top="28%">
+            <div class="yAxis">
+                <label>
+                    Measure
+                </label>
+                <ul class="goNeg">
+                        <li>1</li>
+                        <li>0.75</li>
+                        <li>0.5</li>
+                        <li>0.25</li>
+                        <li>0</li>
+                        <li>-0.25</li>
+                </ul>
+            </div>
+            <div class="xAxis">
+                <ul class="months">
+                        <li class="rel113">Jun 24</li>
+                        <li class="rel114">Jul 22</li>
+                        <li class="rel115">Aug 26</li>
+                        <li class="rel116">Sep 23</li>
+                        <li class="rel117">Oct 28</li>
+                        <li class="rel118">Nov 25</li>
+                </ul>
+                <ul class="years">
+                        <li class="rel113"
+                            data-year="2016"
+                            data-month="06">
+                            <span class="year">2016</span>
+                        </li>
+                        <li class="rel114"
+                            data-year="2016"
+                            data-month="07">
+                            <span class="year">2016</span>
+                        </li>
+                        <li class="rel115"
+                            data-year="2016"
+                            data-month="08">
+                            <span class="year">2016</span>
+                        </li>
+                        <li class="rel116"
+                            data-year="2016"
+                            data-month="09">
+                            <span class="year">2016</span>
+                        </li>
+                        <li class="rel117"
+                            data-year="2016"
+                            data-month="10">
+                            <span class="year">2016</span>
+                        </li>
+                        <li class="rel118"
+                            data-year="2016"
+                            data-month="11">
+                            <span class="year">2016</span>
+                        </li>
+                </ul>
+            </div>
+            <div class="plot">
+            </div>
+        </div>
+    </div>
+    <div class="graphData display">
+        <div class="graphDataContainer">
+            <table class="measureHist" id="measureHist">
+                <thead>
+                    <tr>
+                        <td>&nbsp; </td>
+                            <th data-release-type="S"
+                                data-release-id="113"
+                                data-snapshot-date="6/24/2016"
+                                data-sms-carrier="True"
+                                data-carrier-exists="True"
+                                class="rel113">
+                                Jun 24 <span class='year'>2016</span>
+                            </th>
+                            <th data-release-type="M"
+                                data-release-id="114"
+                                data-snapshot-date="7/22/2016"
+                                data-sms-carrier="True"
+                                data-carrier-exists="True"
+                                class="rel114">
+                                Jul 22 <span class='year'>2016</span>
+                            </th>
+                            <th data-release-type="M"
+                                data-release-id="115"
+                                data-snapshot-date="8/26/2016"
+                                data-sms-carrier="True"
+                                data-carrier-exists="True"
+                                class="rel115">
+                                Aug 26 <span class='year'>2016</span>
+                            </th>
+                            <th data-release-type="Q"
+                                data-release-id="116"
+                                data-snapshot-date="9/23/2016"
+                                data-sms-carrier="True"
+                                data-carrier-exists="True"
+                                class="rel116">
+                                Sep 23 <span class='year'>2016</span>
+                            </th>
+                            <th data-release-type="M"
+                                data-release-id="117"
+                                data-snapshot-date="10/28/2016"
+                                data-sms-carrier="True"
+                                data-carrier-exists="True"
+                                class="rel117">
+                                Oct 28 <span class='year'>2016</span>
+                            </th>
+                            <th data-release-type="M"
+                                data-release-id="118"
+                                data-snapshot-date="11/25/2016"
+                                data-sms-carrier="True"
+                                data-carrier-exists="True"
+                                class="rel118">
+                                Nov 25 <span class='year'>2016</span>
+                            </th>
+                    </tr>
+                </thead>
+                <tbody class="trend">
+                    <tr class="measure">
+                        <th>Measure</th>
+                            <td class="rel113">
+                                0.11
+                            </td>
+                            <td class="rel114">
+                                0.07
+                            </td>
+                            <td class="rel115">
+                                0.07
+                            </td>
+                            <td class="rel116">
+                                0.07
+                            </td>
+                            <td class="rel117">
+                                0.07
+                            </td>
+                            <td class="rel118">
+                                0.07
+                            </td>
+                    </tr>
+                </tbody>
+                <tbody class="hist">
+                    <tr class="measure">
+                        <th>Measure</th>
+                            <td class="rel113">0</td>
+                            <td class="rel114">0</td>
+                            <td class="rel115">0</td>
+                            <td class="rel116">0</td>
+                            <td class="rel117">0</td>
+                            <td class="rel118">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>                    </div>
+            </section>
+        </div>
+        <section id="ViolationSummary" class="rdSection">
+            <div class="rdHead">
+                <h3><a href="/SMS/Carrier/286385/BASIC/UnsafeDriving/Violations/NumViolsDESC.aspx">Violation Summary</a></h3>
+                <h4>Unsafe Driving Violations: 2</h4>
+            </div>
+            <div class="rdBody">
+<table class="sortable smsEvents" data-loaded="1" data-url="/SMS/Carrier/286385/BASIC/UnsafeDriving/Violations/--SORTBY--.aspx>
+    <thead>
+        <tr class="sizingRow">
+            <th class="violcode"></th>
+            <th class="violdesc"></th>
+            <th class="violtotal"></th>
+            <th class="oostotal"></th>
+            <th class="severity"></th>
+        </tr>
+        <tr class="singleHead">
+        <tr class="singleHead">
+            <th class="violcode" data-sort="Code">Violations
+            </th>
+            <th class="violdesc" data-sort="Description">
+                Description</th>
+            <th class="violtotal sorted DESC" data-sort="NumViols">
+                # Violations</th>
+            <th class="oostotal DESC" data-sort="OOSViols">
+                # OOS Violations</th>
+            <th class="severity DESC" data-sort="SeverityWeight">
+                Violation Severity Weight</th>
+        </tr>
+    </thead>
+    <tbody class="sizingBody">
+        <tr class="sizingRow">
+            <td class="violcode"></td>
+            <td class="violdesc"></td>
+            <td class="violtotal"></td>
+            <td class="oostotal"></td>
+            <td class="severity"></td>
+        </tr>
+    </tbody>
+    <tbody class="dataBody">
+            <tr class="violSummary ">
+                <td class="violcode">392.2C</td>
+                <td class="violdesc">Failure to obey traffic control device </td>
+                <td class="violtotal">2</td>
+                <td class="oostotal">0</td>
+                <td class="severity">5</td>
+            </tr>
+    </tbody>
+</table>
+            </div>
+        </section>
+        <section id="InspectionHistory" class="rdSection">
+            <div class="rdHead">
+                <h3><a href="/SMS/Carrier/286385/BASIC/UnsafeDriving/Inspections/WithViolations/InspDateDESC/1.aspx">Inspection History</a></h3>
+                <h4>Driver Inspections with Unsafe Driving Violations: 2</h4>
+            </div>
+            <div class="rdBody">
+                        <input type="hidden" id="mode" name="mode" value="WithViolations" />
+<table class="scrollable smsEvents public"
+           id="inspectionTable"
+           data-page="1"
+           data-row-count="2"
+           data-url="/SMS/Carrier/286385/BASIC/UnsafeDriving/Inspections/--MODE--/--SORTBY--/--PAGE--.aspx?UserType=Public"
+           data-loaded="0">
+    <thead>
+        <tr class="sizingRow">
+            <th class="date"></th>
+            <th class="repnumber"></th>
+            <th class="repstate"></th>
+            <th class="platenumber"></th>
+            <th class="platestate"></th>
+            <th class="vehtype"></th>
+            <th class="severity"></th>
+            <th class="timeweight"></th>
+                <th class="totalweight"></th>
+        </tr>
+        <tr class="topHead">
+            <th colspan="3" class="report">Report </th>
+            <th colspan="3" class="vehicle">Vehicle</th>
+                <th colspan="3" class="measure"><span class="measureFormula"><span class="measure">Measure
+                    = </span><span class="form"><span class="n">Sum of the Total Weight (TotW)</span> <span
+                        class="d">
+Avg. PU &times; UF = <a class="modalContentLink" href="#AdjAveragePU">126</a>                    </span></span></span></th>
+        </tr>
+        <tr>
+            <th data-sort="InspDate" class="date sorted DESC">
+                Inspection Date </th>
+            <th data-sort="ReportNumber" class="repnumber">
+                Number </th>
+            <th data-sort="ReportState" class="repstate">
+                State </th>
+            <th data-sort="UnitLicenseNumber" class="platenumber">
+                Plate Number </th>
+            <th data-sort="UnitLicenseState" class="platestate">
+                Plate State </th>
+            <th data-sort="UnitType" class="vehtype">
+                Type </th>
+            <th data-sort="SeverityWeight" class="severity DESC">
+                <span class="content">Severity Weight<br />
+                    (SW) </span></th>
+            <th data-sort="TimeWeight" class="timeweight DESC">
+                <span class="content">Time Weight<br />
+                    (TiW) </span></th>
+                <th data-sort="TotalServerityWeight" class="totalweight DESC">
+                    <span class="content">Total Weight<br />
+                        (TotW) </span></th>
+        </tr>
+    </thead>
+    <tbody class="sizingBody">
+        <tr class="sizingRow">
+            <td class="date"></td>
+            <td class="repnumber"></td>
+            <td class="repstate"></td>
+            <td class="platenumber"></td>
+            <td class="platestate"></td>
+            <td class="vehtype"></td>
+            <td class="severity"></td>
+            <td class="timeweight"></td>
+<td class="totalweight"></td>        </tr>
+    </tbody>
+    <tbody class="dataBody">
+    </tbody>
+    <tfoot>
+                    <tr class="totalRow">
+                <td colspan="6" class="label">
+                    Sum of measure weights </td>
+                <td colspan="2" class="displayNone">Sum of measure weights</td>
+                <td>
+                    10
+                </td>
+                <td>
+                    2
+                </td>
+                <td>
+                    10
+                </td>
+            </tr>
+    </tfoot>
+</table>
+                        <div class="measureChange">
+                            <div class="prev">
+                                <div class="measData">
+                                    <label>
+                                        Performance Measure Last Month <span>As of 10/28/2016</span>
+                                    </label>
+                                    <div class="frac">
+                                        <span class="num">TotW</span> <span class="den">Avg. PU &times; UF</span>
+                                    </div>
+                                    <span class="eq">=</span>
+                                    <div class="frac">
+                                        <span class="num">10</span>
+                                        <span class="den">125</span>
+                                    </div>
+                                    <span class="eq">=</span> <span class="meas">0.07</span>
+                                </div>
+                            </div>
+                            <div class="cur">
+                                <div class="measData">
+                                    <label>
+                                        Performance Measure this Month <span>As of 11/25/2016</span>
+                                    </label>
+                                    <div class="frac">
+                                        <span class="num">TotW</span> <span class="den">Avg. PU &times; UF</span>
+                                    </div>
+                                    <span class="eq">=</span>
+                                    <div class="frac">
+                                        <span class="num">10</span> <span class="den"><a class='modalContentLink' href='#AdjAveragePU'>126</a></span>
+                                    </div>
+                                    <span class="eq">=</span> <span class="meas">0.07</span>
+                                </div>
+                            </div>
+                            <a href="#perfChange" class="moreInfo slideDownLink">More Info</a>
+                            <aside id="perfChange" class="slideDownBody">
+                                <a href="#close" title="Close" class="modalClose">&otimes;</a>
+                                <h4>Why did my Performance Measure change?</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td>&nbsp; </td>
+                                            <th>Last Month&rsquo;s Weight </th>
+                                            <td class="pm">&nbsp; </td>
+                                            <th>Weights Added from New Inspections </th>
+                                            <td class="pm">&nbsp; </td>
+                                            <th>Weights Removed from Old Inspections </th>
+                                            <th class="thisMonth">This Month&rsquo;s Weight </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>TotW<span>From Violations</span> </th>
+                                            <td>
+                                                10
+                                            </td>
+                                            <td class="pm">+ </td>
+                                            <td>
+                                                0
+                                            </td>
+                                            <td class="pm">- </td>
+                                            <td>
+                                                0
+                                            </td>
+                                            <td class="thisMonth">
+                                                10
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </aside>
+                        </div>
+                    <p id="weightCap" class="footnote">
+                        *** The sum of all violation severity weights (violation weight + out-of-service)
+                        for this inspection has been capped at 30.
+                    </p>
+            </div>
+        </section>
+        
+        <section id="InvestigationResults" class="rdSection">
+            <div class="rdHead">
+                <h3><a href="#">Investigation Results</a></h3>
+                <h4>Unsafe Driving Acute/Critical Violations: 0</h4>
+            </div>
+            <div class="rdBody">
+                    <p class="noData">
+                        This carrier has no Unsafe Driving Acute/Critical Violations to display.
+                    </p>
+            </div>
+        </section>
+        
+    </div>
+    <div id="CarrierDetail">
+    <div id="CarrierDetailCol1" class="CarrierDetailCol">
+        <section id="SummaryOfActivities">
+            <h3>Summary of Activities</h3>
+            <p>
+                The summary includes information on the 5 most recent investigations and 24 months
+                of inspections and crash history.
+            </p>
+            <ul>
+                <li>
+                    <label>
+                        Most Recent Investigation:
+                    </label>
+3/27/2008 (CR And Security Contact Review)                </li>
+                <li>
+                    <label>
+                        Total Inspections:
+                    </label>
+                    69
+                    <ul>
+                        <li>
+                            <label>
+                                Total Inspections without Violations used in SMS:
+                            </label>
+                            39
+                        </li>
+                        <li>
+                            <label>
+                                Total Inspections with Violations used in SMS:
+                            </label>
+                            30
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <label>
+                        Total Crashes<a href="#crashFn" id="crashFnLnk" class="footnoteLnk">*</a>
+                    </label>
+                    : 10
+                </li>
+            </ul>
+            <p class="footnote">
+                <a href="#crashFnLnk" id="crashFn" class="footnoteLnk">*</a>Crashes listed represent a motor carrier&rsquo;s involvement in <a href="/SMS/HelpCenter/Index.aspx#faq1203">reportable crashes</a>, regardless of the carrier&rsquo;s or driver&rsquo;s role in the crash. <a href="/SMS/HelpCenter/Index.aspx#faq1204">Continue for details</a>.
+            </p>
+            <a class="boxLink double modalContentLink" data-height="400" href="#CarrierActivities">
+                Continue for more Crash, Inspection & Investigation Details
+            </a>
+        </section>
+    </div>
+    <div id="CarrierDetailCol2" class="CarrierDetailCol">
+        <section id="CarrierRegistration">
+            <h3>Carrier Registration</h3>
+            <a class="boxLink modalLink"
+               href="/SMS/Carrier/286385/CarrierRegistration.aspx">Carrier Registration Details</a> <a class="boxLink modalLink print"
+                                                                                             data-has-tabs="true"
+                                                                                             href="/SMS/Carrier/286385/Threshold.aspx">Subject to Hazmat Threshold</a>
+                                                                                            <a class="boxLink" target="_blank" href="http://www.fmcsa.dot.gov/registration/updating-your-registration">
+                                                                                                Update Registration Info
+                                                                                            </a>
+                                                                                        </section>
+                                                                                    </div>
+                                                                                    <div id="CarrierDetailCol3" class="CarrierDetailCol">
+                                                                                        <section id="PenaltiesHistory">
+                                                                                            <h3>Penalties History</h3>
+                                                                                                <p class="data-source">
+                                                                                                    (Six years as of 12/12/2016
+                                                                                                    updated daily from <a target="_blank" href="/SafetyProgram/EnforcementCase.aspx">
+                                                                                                        FMCSA
+                                                                                                    </a>)
+                                                                                                </p>
+                                                                                                    <p>
+                                                                                                        No penalties found
+                                                                                                    </p>
+                                                                                        </section>
+                                                                                        <section id="ToolResources">
+                                                                                            <h3>Tools/Resources</h3>
+                                                                                            <a class="boxLink" target="_blank" href="https://csa.fmcsa.dot.gov/Documents/SMSMethodology.pdf">SMS Methodology</a>
+                                                                                            <a class="boxLink" target="_blank" href="/SMS/HelpCenter/Index.aspx#Improve">
+                                                                                                How to Improve
+                                                                                            </a><a class="boxLink" target="_blank" href="https://dataqs.fmcsa.dot.gov">
+                                                                                                Request a Data Review
+                                                                                            </a>
+                                                                                            <h5>
+                                                                                                For U.S. DOT# 286385
+                                                                                            </h5>
+                                                                                            <a class="boxLink" href="/SMS/Carrier/286385/CompleteProfile.aspx">Complete SMS Profile</a>
+
+                                                                                            <a class="boxLink" href="/SMS/Carrier/286385/History.aspx">Carrier History</a>
+
+                                                                                                <a class="boxLink modalContentLink" data-width="330" data-height="210" href="#Downloads">
+                                                                                                    Downloads
+                                                                                                </a>
+                                                                                        </section>
+                                                                                    </div>
+                                                                                    <div class="clear">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-content">
+                                                                                    <aside id="CarrierActivities">
+                                                                                        <h2>
+                                                                                            Summary of Activities <span class="asOf">
+                                                                                                (as of 11/25/2016,
+                                                                                                updated monthly)
+                                                                                            </span>
+                                                                                        </h2>
+                                                                                        <div class="modalBody">
+                                                                                            <p>
+                                                                                                The summary includes information on the 5 most recent investigations and 24 months
+                                                                                                of inspections and crash history.
+                                                                                            </p>
+                                                                                            <table>
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th class="inter">
+                                                                                                            Most Recent Investigation:
+3/27/2008 (CR And Security Contact Review)                                                                                                        </th>
+                                                                                                        <th class="insp">
+                                                                                                            Total Inspections: 69
+                                                                                                            <span class="subItem">Total inspections without violations used in SMS: 39</span>
+                                                                                                            <span class="subItem">Total inspections with violations used in SMS: 30</span>
+                                                                                                        </th>
+                                                                                                        <th class="crash">
+                                                                                                            Total Crashes: 10<a href="#crashPopFn" id="crashPopFnLnk">*</a>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td class="inter">
+                                                                                                            <ul>
+                                                                                                                    <li>
+3/27/2008 (CR And Security Contact Review)                                                                                                                                                                                                                                            </li>
+                                                                                                                    <li>
+3/26/2008 (Shipper Review)                                                                                                                                                                                                                                            </li>
+                                                                                                                    <li>
+4/20/1989 (Safety Review)                                                                                                                                                                                                                                            </li>
+                                                                                                            </ul>
+                                                                                                        </td>
+                                                                                                        <td class="insp">
+                                                                                                            <span class="ev header">
+                                                                                                                <label>
+                                                                                                                </label>
+                                                                                                                <span class="num"># Insp.</span> <span class="oos">OOS</span>
+                                                                                                            </span><span class="ev">
+                                                                                                                <label>
+                                                                                                                    Driver Inspections
+                                                                                                                </label>
+                                                                                                                <span class="num">69</span>
+                                                                                                                <span class="oos">1.4%</span>
+                                                                                                            </span><span class="ev">
+                                                                                                                <label>
+                                                                                                                    Vehicle Inspections
+                                                                                                                </label>
+                                                                                                                <span class="num">61</span>
+                                                                                                                <span class="oos">11.5%</span>
+                                                                                                            </span><span class="ev subItem">
+                                                                                                                <label>
+                                                                                                                    Placardable HM Inspections
+                                                                                                                </label>
+                                                                                                                <span class="num">51</span>
+                                                                                                                <span class="oos">0.0%</span>
+                                                                                                            </span><span class="ev subItem">
+                                                                                                                <label>
+                                                                                                                    % Placardable HM Inspections
+                                                                                                                </label>
+                                                                                                                <span class="num">83.6%</span>
+                                                                                                                <span class="oos">&nbsp;</span>
+                                                                                                            </span>
+                                                                                                        </td>
+                                                                                                        <td class="crash">
+                                                                                                            <span class="ev">
+                                                                                                                <label>
+                                                                                                                    Fatal Crashes
+                                                                                                                </label>
+                                                                                                                <span class="num">1</span>
+                                                                                                            </span><span class="ev">
+                                                                                                                <label>
+                                                                                                                    Injury Crashes
+                                                                                                                </label>
+                                                                                                                <span class="num">5</span>
+                                                                                                            </span><span class="ev">
+                                                                                                                <label>
+                                                                                                                    Towaway Crashes
+                                                                                                                </label>
+                                                                                                                <span class="num">4</span>
+                                                                                                            </span>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <p class="footnote">
+                                                                                                <a href="#crashPopFnLnk" id="crashPopFn">*</a>Crashes listed represent a motor carrier&rsquo;s involvement in <a href="/SMS/HelpCenter/Index.aspx#faq1203">reportable crashes</a>, regardless of the carrier&rsquo;s or driver&rsquo;s role in the crash. <a href="/SMS/HelpCenter/Index.aspx#faq1204">Continue for details</a>.
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </aside>
+                                                                                    
+                                                                                        <aside id="Downloads">
+                                                                                            <h2>Downloads</h2>
+                                                                                            <div class="modalBody">
+                                                                                                <p>
+                                                                                                    Select a focus and file type to download SMS data.
+                                                                                                </p>
+<form action="/SMS/Carrier/286385/Download.aspx" method="get">                                                                                                    <ul>
+                                                                                                        <li>
+                                                                                                            <label>
+                                                                                                                Focus:
+                                                                                                            </label>
+                                                                                                            <select name="BASIC">
+                                                                                                                <option value="0">All</option>
+                                                                                                                    <option value="11">Unsafe Driving</option>
+                                                                                                                    <option value="17">Crash Indicator</option>
+                                                                                                                    <option value="12">HOS Compliance</option>
+                                                                                                                    <option value="15">Vehicle Maint.</option>
+                                                                                                                    <option value="14">Drugs/Alcohol</option>
+                                                                                                                    <option value="16">HM Compliance</option>
+                                                                                                                    <option value="13">Driver Fitness</option>
+                                                                                                                                                                                                                            </select>
+                                                                                                        </li>
+                                                                                                        <li>
+                                                                                                            <label>
+                                                                                                                File Type:
+                                                                                                            </label>
+                                                                                                            <select name="FileType">
+                                                                                                                <option value="XLSX">Excel</option>
+                                                                                                                <option value="XML">XML</option>
+                                                                                                            </select>
+                                                                                                        </li>
+                                                                                                        <li class="submit">
+                                                                                                            <input type="submit" value="Download" />
+                                                                                                        </li>
+                                                                                                    </ul>
+</form>                                                                                            </div>
+                                                                                        </aside>
+                                                                                                                                                                            <aside id="AdjAveragePU">
+                                                                                            <h2>
+                                                                                                Average PU &times; Utilization Factor <span class="asOf">
+                                                                                                    (as of 11/25/2016,
+                                                                                                    updated monthly)
+                                                                                                </span>
+                                                                                            </h2>
+                                                                                            <div class="modalBody">
+                                                                                                <p>The SMS normalizes the Unsafe Driving and Crash Indicator BASICs measure by carrier size (i.e., a hybrid power unit and vehicle miles travelled measure) to account for exposure. Carrier size is defined as average power units multiplied by the utilization factor.</p>
+                                                                                                <div class="avdAvgCalc">
+                                                                                                    <span class="comp total">
+                                                                                                        <span class="val">126</span>
+                                                                                                        <label>
+                                                                                                            Average PU &times; Utilization Factor
+                                                                                                        </label>
+                                                                                                    </span><span class="sign">=</span> <span class="comp avgPU">
+                                                                                                        <span class="val">87.7</span>
+                                                                                                        <label>
+                                                                                                            Average Power Units
+                                                                                                        </label>
+                                                                                                    </span><span class="sign">&times;</span> <span class="comp UF">
+                                                                                                        <span class="val">1.4372</span>
+                                                                                                        <label>
+                                                                                                            Utilization Factor
+                                                                                                        </label>
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                                <ul class="tabs">
+                                                                                                    <li><a href="#avgPU" data-select="True">Average Power Units</a></li>
+                                                                                                    <li><a href="#uf">Utilization Factor</a></li>
+                                                                                                </ul>
+                                                                                                <div id="avgPU" class="tabBody">
+                                                                                                    <p>In order to account for changes in a carrier&#39;s fleet size during the previous 24 months an average power unit value is used in the calculation to determine a carrier&#39;s Unsafe Driving BASIC and Crash Indicator measures.</p>
+                                                                                                    <div class="avgPUFormula">
+                                                                                                        <span class="comp total">
+                                                                                                            <span class="val">87.7</span>
+                                                                                                            <label>
+                                                                                                                Average Power Units
+                                                                                                            </label>
+                                                                                                        </span><span class="sign">=</span> <span class="frac">
+                                                                                                            <span class="n">
+                                                                                                                <span class="comp pu">
+                                                                                                                    <span class="val">88</span>
+                                                                                                                    <label>
+                                                                                                                        Current Power Units
+                                                                                                                    </label>
+                                                                                                                </span><span class="sign">+</span> <span class="comp pu">
+                                                                                                                    <span class="val">88</span>
+                                                                                                                    <label>
+                                                                                                                        Power Units 6 Months Ago
+                                                                                                                    </label>
+                                                                                                                </span><span class="sign">+</span> <span class="comp pu">
+                                                                                                                    <span class="val">87</span>
+                                                                                                                    <label>
+                                                                                                                        Power Units 18 Months Ago
+                                                                                                                    </label>
+                                                                                                                </span>
+                                                                                                            </span>
+                                                                                                            <br />
+                                                                                                            <span class="d val">3</span>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div id="uf" class="tabBody">
+                                                                                                    <p>The Utilization Factor is a multiplier that adjusted the average PU values based on the utilization in terms of VMT per average PU.</p>
+                                                                                                    <ol>
+                                                                                                        <li>
+                                                                                                            <label>
+                                                                                                                Determine Carrier Segment:
+                                                                                                            </label>
+                                                                                                                <span class="seg">
+                                                                                                                    <strong>Straight</strong><br />
+                                                                                                                    Straight trucks/other vehicles constituting more than 30% of the total PU<br />
+                                                                                                                    U.S. DOT# 286385 = 56%
+                                                                                                                    Straight trucks/other vehicles
+                                                                                                                </span>
+                                                                                                        </li>
+                                                                                                        <li>
+                                                                                                            <label>
+                                                                                                                Determine VMT per Average Power Unit
+                                                                                                            </label>
+                                                                                                                <div class="vmtPUForm">
+                                                                                                                    <span class="comp">
+                                                                                                                        <span class="val">28,744</span>
+                                                                                                                        <label>
+                                                                                                                            VMT per Average Power Unit
+                                                                                                                        </label>
+                                                                                                                    </span> <span class="sign">=</span> <span class="comp">
+                                                                                                                        <span class="val">2,520,000</span>
+                                                                                                                        <label>
+                                                                                                                            VMT From Registration (MCS-150)
+                                                                                                                        </label>
+                                                                                                                    </span><span class="sign">&divide;</span> <span class="comp">
+                                                                                                                        <span class="val">87.7</span>
+                                                                                                                        <label>
+                                                                                                                            Average Power Units
+                                                                                                                        </label>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                        </li>
+                                                                                                        <li>
+                                                                                                            <label>
+                                                                                                                Based on Step 1 and 2 calculate the Utilization Factor
+                                                                                                            </label>
+                                                                                                                <table>
+                                                                                                                    <caption>
+                                                                                                                        Straight Segment
+                                                                                                                    </caption>
+                                                                                                                    <thead>
+                                                                                                                        <tr>
+                                                                                                                            <th>Meets Criteria</th>
+                                                                                                                            <th>VMT per Avgerage PU</th>
+                                                                                                                            <th>Utilization Factor</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                            </td>
+                                                                                                                            <td>&lt; 20,000</td>
+                                                                                                                            <td>1</td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+<img alt="Yes" src="/SMS/Images/Icons/SMS_Check.png" />                                                                                                                            </td>
+                                                                                                                            <td>20,000 &ndash; 60,000</td>
+                                                                                                                            <td class="tall">
+1.4372 = <span class="inline-comp">
+                                                                                                                                    <span class="val">28,744</span><label>
+                                                                                                                                        VMT per
+                                                                                                                                        PU
+                                                                                                                                    </label>
+                                                                                                                                </span> &divide; 20,000                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                            </td>
+                                                                                                                            <td>60,000 &ndash; 200,000</td>
+                                                                                                                            <td>3</td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                            </td>
+                                                                                                                            <td>&gt; 200,000</td>
+                                                                                                                            <td>1</td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                            </td>
+                                                                                                                            <td>No Recent VMT Information</td>
+                                                                                                                            <td>1</td>
+                                                                                                                        </tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                        </li>
+                                                                                                    </ol>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </aside>
+                                                                                </div>
+
+    <div id="footer-disclaimer"><h5>
+    Use of SMS Data/Information</h5>
+<p><h6>FAST Act of 2015:</h6></p>
+<p>
+Readers should not draw conclusions about a carrier's overall safety condition simply based on the data displayed in this system. Unless a motor carrier has received an UNSATISFACTORY safety rating under part 385 of title 49, Code of Federal Regulations, or has otherwise been ordered to discontinue operations by the Federal Motor Carrier Safety Administration, it is authorized to operate on the Nation's roadways.</p>
+<p><h6>Safety Measurement System:</h6></p>
+<p>
+    The data in the Safety Measurement System (SMS) is performance data used by the
+    Agency and Enforcement Community. A
+    <img src="https://ai.fmcsa.dot.gov/SMS/Images/Icons/prioritize_small.png" alt='Carrier may be prioritized for an intervention action and roadside inspection.'
+        class='prioritizeIcon' />
+    symbol, based on that data, indicates that FMCSA may prioritize a motor carrier
+    for further monitoring.
+</p>
+<p>
+    The
+    <img src="https://ai.fmcsa.dot.gov/SMS/Images/Icons/prioritize_small.png" alt='Carrier may be prioritized for an intervention action and roadside inspection.'
+        class='prioritizeIcon' />
+    symbol is not intended to imply any federal safety rating of the carrier pursuant
+    to 49 USC 31144. Readers should not draw conclusions about a carrier's overall safety
+    condition simply based on the data displayed in this system. Unless a motor carrier
+    in the SMS has received an UNSATISFACTORY safety rating pursuant to 49 CFR Part
+    385, or has otherwise been ordered to discontinue operations by the FMCSA, it is
+    authorized to operate on the nation's roadways.
+</p>
+<p>
+    Motor carrier safety ratings are available at <a href="http://safer.fmcsa.dot.gov"
+        target="_blank">http://safer.fmcsa.dot.gov</a> and motor carrier licensing and
+    insurance status are available at <a href="http://li-public.fmcsa.dot.gov" target="_blank">
+        http://li-public.fmcsa.dot.gov/</a>.
+</p></div>
+</article>
+<div id="moreInfo" class="smsModal">
+    <h2>More Info</h2>
+    <div class="modalBody">
+        <h3>On-Road Performance</h3>
+        <p>
+            A carrier’s on-road performance in each BASIC is based on 24 months of inspection
+            and crash data.
+        </p>
+        <h4>Performance Measure</h4>
+        <p>
+            Carrier violations or crashes are weighted by time and severity to produce a measure
+            for that carrier in each BASIC. The measure only considers individual performance,
+            with a measure of 0 indicating best performance.
+        </p>
+        <h4>Performance Percentile</h4>
+        <p>
+            The SMS calculates a percentile (based on the measure) for each carrier with sufficient
+            information to be compared against carriers with similar safety events (inspections,
+            inspections with violations, crashes). Percentiles are calculated on a 0−100 scale,
+            with 100 indicating worst performance and 0 indicating best performance.
+        </p>
+        <h4>Intervention Threshold</h4>
+        <p>
+            Intervention Thresholds for carriers are organized by BASIC and are set based on
+            a given BASIC’s relationship to crash risk
+        </p>
+        <table class="thresholdData">
+            <thead>
+                <tr>
+                    <th class="rowHead">BASIC </th>
+                    <th>Passenger </th>
+                    <th>HM </th>
+                    <th class="last">General </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Unsafe Driving
+                    </th>
+                        <td>50% </td>
+                        <td>60% </td>
+                        <td class="last">65% </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Investigation Results</h3>
+        <h4>Acute/Critical Violations</h4>
+        <p>
+            Acute/Critical Violations indicate that a carrier is not complying with federal safety
+            regulations and the carrier must take corrective action.
+        </p>
+    </div>
+</div>
+
+
+            <footer id="fmcsa-footer">
+                <a id="fbLink" title="Website Feedback" class="FeedBackFooterBtn" href="https://csa.fmcsa.dot.gov/CSA_Feedback.aspx?defaulttag=SMS" target="_blank">
+                    Submit Feedback
+                    <img src="/SMS/Images/Icons/feed-arrow.png" alt="Website Feedback" style="margin-left: 5px;">
+                </a>
+                <address>
+                    <img src="/SMS/Images/Layout/dot_logo.png" class="dot-logo" alt="" />
+                    <p class="footer_dot_label">
+                        <a href="http://www.dot.gov" target="_blank">U.S. Department of Transportation</a>
+                    </p>
+                    <p class="footer_administration_label">
+                        <a href="http://www.fmcsa.dot.gov" target="_blank">Federal Motor Carrier Safety Administration</a>
+                    </p>
+                    <p>
+                        1200 New Jersey Avenue, SE<br />
+                        Washington, DC 20590<br />
+                        855-368-4200
+                    </p>
+                    <a class="viewDesktop" href="/SMS/Home/DesktopVersion.aspx?ReturnURL=/SMS/Carrier/286385/BASIC/UnsafeDriving.aspx">
+                        View Desktop Website
+                    </a><a class="viewResponsive" href="/SMS/Home/MobileVersion.aspx?ReturnURL=/SMS/Carrier/286385/BASIC/UnsafeDriving.aspx">
+                        View Responsive Website
+                    </a>
+                </address>
+                <ul id="footer-menu-1" class="menu" style="height: 412px;">
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/contact-us" title="FMCSA Main Phone Numbers" target="_blank">
+                            Contact Us
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/careers" title="" target="_blank">Careers</a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/subscribe-email-updates" title="Subscribe to email updates for various topics"
+                           target="_blank">Email Subscriptions</a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/mission/forms" title="" target="_blank">Forms</a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/resources-for-carrier-companies" title="" target="_blank">
+                            Resources for Carriers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/resources-for-consumers" title="" target="_blank">
+                            Resources for Consumers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/resources-for-drivers" title="" target="_blank">
+                            Resources
+                            for Drivers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/foia" title="" target="_blank">FOIA</a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/languages" title="FMCSA content available in Spanish, French, Simplified Chinese, Traditional Chinese, German, Japanese, Vietnamese, and others."
+                           target="_blank">Languages</a>
+                    </li>
+                    <li>
+                        <a href="http://ntl.bts.gov/" title="" target="_blank">DOT Transportation Library</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dot.gov/blog/fastlane" title="DOT Blog" target="_blank">
+                            Fastlane
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/mission/copyrightattribution-notice" title="Copyright/Attribution Notice"
+                           target="_blank">Copyright/Attribution Notice</a>
+                    </li>
+                    <li>
+                        <a href="https://portal.fmcsa.dot.gov/login" title="Link for Internal and Partner User Only - Log-In Required"
+                           target="_blank">FMCSA Portal</a>
+                    </li>
+                </ul>
+                <ul class="menu" id="footer-menu-2">
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/mission/federal-motor-carrier-safety-administration-online-privacy-policy"
+                           title="FMCSA Privacy Policy and Resources" target="_blank">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/mission/accessibility" title="FMCSA Accessibility Information and Resources"
+                           target="_blank">Accessibility</a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/mission/web-policies-and-resources" title="" target="_blank">
+                            DOT Web Policies &amp; Notices
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://business.usa.gov/" title="" target="_blank">BusinessUSA</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dot.gov/highlights/buyamerica" title="" target="_blank">
+                            Buy America
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.fmcsa.dot.gov/mission/civil-rights" title="DOT Office of Civil Rights"
+                           target="_blank">Civil Rights</a>
+                    </li>
+                    <li>
+                        <a href="https://www.civilrights.dot.gov/civil-rights-awareness-enforcement/employment-related/affirmative-employment/no-fear-act"
+                           title="No Fear Act Data" target="_blank">No Fear Act Data</a>
+                    </li>
+                    <li>
+                        <a href="http://www.oig.dot.gov/Hotline" title="Office of the Inspector General Hotline"
+                           target="_blank">OIG Hotline</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dot.gov/recovery" title="Information on the Recovery Act" target="_blank">
+                            Recovery Act
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://usa.gov/" title="" target="_blank">USA.gov</a>
+                    </li>
+                    <li>
+                        <a href="http://whitehouse.gov/" title="" target="_blank">WhiteHouse.gov</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dot.gov/mission/open/open-government" title="" target="_blank">
+                            Open
+                            Government
+                        </a>
+                    </li>
+                </ul>
+                <div class="clear">
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlAgn3YKovOdcyBT0Nc_y5IXDxIMZdDqw" async defer></script>
+</body>
+</html>
