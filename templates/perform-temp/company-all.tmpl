@@ -9,7 +9,7 @@
         <!-- DataTables -->
         <link href="/static/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="/static/datatables/custom.css" charset="utf-8">
-        <title>All Customers</title>
+        <title>All Companies</title>
 
     </head>
 
@@ -28,7 +28,7 @@
                     <div class="col-lg-12">
 
                         <p class="lead">
-                            Customers
+                            Companies
                             <span class="pull-right">
                                 <a href="/cns/company/new">Add <i class="fa fa-plus"></i></a>
                             </span>
@@ -37,28 +37,25 @@
                         <table id="companies" class="table table-bordered table-hover" width="100%" style="width: 100%;background-color:white;">
                             <thead>
                                 <tr id="search">
+                                    <th>id</th>
                                     <th>name</th>
-                                    <th>contact</th>
-                                    <th>phone</th>
-                                    <th>email</th>
-                                    <th>dot</th>
+                                    <th>registeredDate</th>
+                                    <th>dunsNumber</th>
                                 </tr>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Contact</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>DOT#</th>
+                                    <th>RegisteredDate</th>
+                                    <th>DUNSNumber</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {{ range $company := .companies }}
                                     <tr id="{{ $company.Id }}" class="clickable" data-url="/cns/company/{{ $company.Id }}">
+                                        <td>{{ $company.Id }}</td>
                                         <td>{{ $company.Name }}</td>
-                                        <td>{{ $company.ContactName }}</td>
-                                        <td>{{ $company.ContactPhone }}</td>
-                                        <td>{{ $company.Email }}</td>
-                                        <td>{{ $company.DOTNum }}</td>
+                                        <td>{{ $company.RegisteredDate }}</td>
+                                        <td>{{ $company.DUNSNumber }}</td>
                                     </tr>
                                 {{ end }}
                             </tbody>
@@ -81,18 +78,18 @@
 
         <script type="text/javascript">
 
-                var table = $('#companies').DataTable({
-                    "lengthMenu":[10,15,20],
-                    "pageLength": 20,
-                    "columnDefs": [
-                        { "orderable": false, "targets": [3] },
-                        { "name": "name",     "targets": 0 },
-                        { "name": "contact",  "targets": 1 },
-                        { "name": "phone",    "targets": 2 },
-                        { "name": "email",    "targets": 3 },
-                        { "name": "dot",      "targets": 4 }
-                    ]
-                });
+            var table = $('#companies').DataTable({
+                "lengthMenu":[10,15,20],
+                "pageLength": 10,
+                "columnDefs": [
+                    { "orderable": false,       "targets": [3] },
+                    { "name": "id",             "targets": 0 },
+                    { "name": "name",           "targets": 1 },
+                    { "name": "registeredDate", "targets": 2 },
+                    { "name": "dunsNumber",     "targets": 3 }
+                ]
+            });
+
 
         </script>
 

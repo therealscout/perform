@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/cagnosolutions/adb"
-	"github.com/cagnosolutions/mg"
 	"github.com/cagnosolutions/web"
 )
 
@@ -167,80 +166,6 @@ var saveHomePage = web.Route{"POST", "/cns/employee/:id/homepage", func(w http.R
 	return
 }}
 
-var companyGlobalNotifyLastSet = web.Route{"GET", "/cns/company/global/notify", func(w http.ResponseWriter, r *http.Request) {
-	var date time.Time
-	resp := "The customer service notifications were never set"
-	if db.Get("meta", "companyNotifySetDate", &date) {
-		resp = "The customer notifications were last set on " + date.Format("1/2/2006")
-	}
-	ajaxResponse(w, `{"error":false,"msg":"`+resp+`"}`)
-	return
-}}
-
-var companyGlobalNotifySet = web.Route{"POST", "/cns/company/global/notify", func(w http.ResponseWriter, r *http.Request) {
-	var companyServices []CompanyService
-	db.All("company-service", &companyServices)
-	for _, service := range companyServices {
-		service.GenNotifications()
-		db.Set("company-service", service.Id, service)
-	}
-	date := time.Now()
-	db.Set("meta", "companyNotifySetDate", date)
-	ajaxResponse(w, `{"error":false, "msg":"Successfully added service notifications to all customers"}`)
-	return
-}}
-
-var companyGlobalNotifyLastReset = web.Route{"GET", "/cns/company/global/notify/reset", func(w http.ResponseWriter, r *http.Request) {
-	var date time.Time
-	resp := "The customer service notifications have never been reset"
-	if db.Get("meta", "companyNotifyResetDate", &date) {
-		resp = "The custoer service notifications were last reset on " + date.Format("1/2/2006")
-	}
-	ajaxResponse(w, `{"error":false,"msg":"`+resp+`"}`)
-	return
-}}
-
-var companyGlobalNotifyReset = web.Route{"POST", "/cns/company/global/notify/reset", func(w http.ResponseWriter, r *http.Request) {
-	var companyServices []CompanyService
-	db.All("company-service", &companyServices)
-	for _, service := range companyServices {
-		service.ResetNotifications()
-		db.Set("company-service", service.Id, service)
-	}
-	var notifications []Notification
-	db.TestQuery("notification", &notifications, adb.Eq("type", "COMPANY"), adb.Eq("subType", "SERVICE"))
-	for _, notification := range notifications {
-		db.Del("notification", notification.Id)
-	}
-	date := time.Now()
-	db.Set("meta", "companyNotifyResetDate", date)
-	ajaxResponse(w, `{"error":false, "msg":"Successfully reset all customer service notifications"}`)
-	return
-}}
-
-var driverGlobalNotifyLastSet = web.Route{"GET", "/cns/driver/global/notify", func(w http.ResponseWriter, r *http.Request) {
-	var date time.Time
-	resp := "The driver form notifications were never set"
-	if db.Get("meta", "driverNotifySetDate", &date) {
-		resp = "The driver form Notifications were last set on " + date.Format("1/2/2006")
-	}
-	ajaxResponse(w, `{"error":false,"msg":"`+resp+`"}`)
-	return
-}}
-
-var driverGlobalNotifySet = web.Route{"POST", "/cns/driver/global/notify", func(w http.ResponseWriter, r *http.Request) {
-	var drivers []Driver
-	db.All("driver", &drivers)
-	for _, driver := range drivers {
-		driver.GenNotifications()
-		db.Set("driver", driver.Id, driver)
-	}
-	date := time.Now()
-	db.Set("meta", "driverNotifySetDate", date)
-	ajaxResponse(w, `{"error":false, "msg":"Successfully added service notifications to all customers"}`)
-	return
-}}
-
 /* --- Company Management --- */
 
 var companyAll = web.Route{"GET", "/cns/company", func(w http.ResponseWriter, r *http.Request) {
@@ -265,12 +190,11 @@ var companyView = web.Route{"GET", "/cns/company/:id", func(w http.ResponseWrite
 	sort.Stable(sort.Reverse(notes))
 	db.All("employee", &employees)
 	tc.Render(w, r, "company.tmpl", web.Model{
-		"company":       company,
-		"notes":         notes,
-		"employees":     employees,
-		"quickNotes":    quickNotes,
-		"employeeId":    web.GetId(r),
-		"companyConsts": COMPANY_CONSTS,
+		"company":    company,
+		"notes":      notes,
+		"employees":  employees,
+		"quickNotes": quickNotes,
+		"employeeId": web.GetId(r),
 	})
 	return
 }}
@@ -279,35 +203,14 @@ var companySave = web.Route{"POST", "/cns/company", func(w http.ResponseWriter, 
 	var company Company
 	db.Get("company", r.FormValue("id"), &company)
 	FormToStruct(&company, r.Form, "")
-	var companies []Company
-	db.TestQuery("company", &companies, adb.Eq("email", company.Email), adb.Ne("id", `"`+company.Id+`"`))
-	if len(companies) > 0 {
-		end := "/new"
-		if r.FormValue("id") != "" {
-			end = "/" + r.FormValue("id")
-		}
-		web.SetErrorRedirect(w, r, "/cns/company"+end, "Error saving company. Email is already registered")
-		return
-	}
+
 	if company.Id == "" {
 		company.Id = strconv.Itoa(int(time.Now().UnixNano()))
+		company.RegisteredDate = time.Now().UnixNano()
 	}
-	if company.SameAddress {
-		company.MailingAddress = company.PhysicalAddress
-	}
-	if company.CreditCard.ExpirationMonth > 0 && company.CreditCard.ExpirationYear > 0 {
-		company.CreditCard.ExpirationDate = strconv.Itoa(company.CreditCard.ExpirationMonth) + "/" + strconv.Itoa(company.CreditCard.ExpirationYear)
-	}
+
 	db.Set("company", company.Id, company)
-	if r.FormValue("from") == "vehicle" {
-		web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id+"/vehicle", "Successfully updated insurance information")
-		return
-	}
-	if r.FormValue("from") == "service" {
-		UpdateCompanyEmails(&company)
-		web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id+"/service", "Successfully updated service information")
-		return
-	}
+
 	web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id, "Successfully saved company")
 	return
 }}
@@ -328,52 +231,6 @@ var companyNoteSave = web.Route{"POST", "/cns/company/:id/note", func(w http.Res
 	note.EndTimePretty = r.FormValue("dateTime")
 	db.Set("note", note.Id, note)
 	web.SetSuccessRedirect(w, r, "/cns/company/"+r.FormValue(":id"), "Successfully saved note")
-	return
-}}
-
-var companyServiceView = web.Route{"GET", "/cns/company/:id/service", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-	var companyService CompanyService
-	db.TestQueryOne("company-service", &companyService, adb.Eq("companyId", `"`+company.Id+`"`))
-	tc.Render(w, r, "company-service.tmpl", web.Model{
-		"company":        company,
-		"companyService": companyService,
-	})
-	return
-}}
-
-var companyServiceSave = web.Route{"POST", "/cns/company/:id/service", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-	var companyService CompanyService
-	db.Get("company-service", r.FormValue("id"), &companyService)
-	FormToStruct(&companyService, r.Form, "")
-	if companyService.CompanyId != company.Id {
-		web.SetErrorRedirect(w, r, "/cns/company/"+company.Id+"/service", "Error saving company services")
-		return
-	}
-	if companyService.Id == "" {
-		companyService.Id = strconv.Itoa(int(time.Now().UnixNano()))
-	}
-	db.Set("company-service", companyService.Id, companyService)
-	web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id+"/service", "Successfully saved company Services")
-
-}}
-
-var companyServiceNotify = web.Route{"POST", "/cns/company/:id/service", func(w http.ResponseWriter, r *http.Request) {
-	compId := r.FormValue(":id")
-	var companyService CompanyService
-	db.TestQueryOne("company-service", &companyService, adb.Eq("companyId", `"`+compId+`"`))
-	companyService.GenNotifications()
-	db.Set("company-service", companyService.Id, companyService)
-	web.SetSuccessRedirect(w, r, "/cns/company/"+compId+"/notification", "Successfully created notifications")
 	return
 }}
 
@@ -561,75 +418,51 @@ var companyNotificaltionDel = web.Route{"POST", "/cns/company/:id/notification/:
 	return
 }}
 
-var companyFeature = web.Route{"GET", "/cns/company/:id/feature", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-	var companyFeatures CompanyFeatures
-	db.TestQueryOne("company-features", &companyFeatures, adb.Eq("companyId", `"`+company.Id+`"`))
-	tc.Render(w, r, "company-features.tmpl", web.Model{
-		"company":         company,
-		"companyFeatures": companyFeatures,
-	})
-}}
-
-var companyFeatureSave = web.Route{"POST", "/cns/company/:id/feature", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-	var companyFeatures CompanyFeatures
-	db.Get("company-features", r.FormValue("id"), &companyFeatures)
-	FormToStruct(&companyFeatures, r.Form, "")
-	if companyFeatures.Id == "" {
-		companyFeatures.Id = strconv.Itoa(int(time.Now().UnixNano()))
-		companyFeatures.CompanyId = company.Id
-	}
-	db.Set("company-features", companyFeatures.Id, companyFeatures)
-	active, _ := strconv.ParseBool(r.FormValue("login"))
-	if active {
-		if company.Email == "" {
-			company.Active = false
-			db.Set("company", company.Id, company)
-			web.SetErrorRedirect(w, r, "/cns/company/"+company.Id+"/feature", "Customer must have a valid email address before enabling login.<br>All other features were saved")
-			return
-		}
-		if company.Password == "" {
-			company.Password = company.Email
-		}
-	}
-	company.Active = active
-	db.Set("company", company.Id, company)
-	web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id+"/feature", "Successfully saved features")
-	return
-}}
-
-var companyViolation = web.Route{"GET", "/cns/company/:id/violation", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-	tc.Render(w, r, "company-violation.tmpl", web.Model{
-		"company":    company,
-		"violations": GetCustomerViolations(company.Id),
-	})
-}}
-
-var companySafer = web.Route{"GET", "/cns/company/:id/safer", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-	tc.Render(w, r, "company-safer.tmpl", web.Model{
-		"company": company,
-		"safer":   GetCustomerSafer(company.Id),
-	})
-}}
+// var companyFeature = web.Route{"GET", "/cns/company/:id/feature", func(w http.ResponseWriter, r *http.Request) {
+// 	var company Company
+// 	if !db.Get("company", r.FormValue(":id"), &company) {
+// 		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
+// 		return
+// 	}
+// 	var companyFeatures CompanyFeatures
+// 	db.TestQueryOne("company-features", &companyFeatures, adb.Eq("companyId", `"`+company.Id+`"`))
+// 	tc.Render(w, r, "company-features.tmpl", web.Model{
+// 		"company":         company,
+// 		"companyFeatures": companyFeatures,
+// 	})
+// }}
+//
+// var companyFeatureSave = web.Route{"POST", "/cns/company/:id/feature", func(w http.ResponseWriter, r *http.Request) {
+// 	var company Company
+// 	if !db.Get("company", r.FormValue(":id"), &company) {
+// 		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
+// 		return
+// 	}
+// 	var companyFeatures CompanyFeatures
+// 	db.Get("company-features", r.FormValue("id"), &companyFeatures)
+// 	FormToStruct(&companyFeatures, r.Form, "")
+// 	if companyFeatures.Id == "" {
+// 		companyFeatures.Id = strconv.Itoa(int(time.Now().UnixNano()))
+// 		companyFeatures.CompanyId = company.Id
+// 	}
+// 	db.Set("company-features", companyFeatures.Id, companyFeatures)
+// 	active, _ := strconv.ParseBool(r.FormValue("login"))
+// 	if active {
+// 		if company.Email == "" {
+// 			company.Active = false
+// 			db.Set("company", company.Id, company)
+// 			web.SetErrorRedirect(w, r, "/cns/company/"+company.Id+"/feature", "Customer must have a valid email address before enabling login.<br>All other features were saved")
+// 			return
+// 		}
+// 		if company.Password == "" {
+// 			company.Password = company.Email
+// 		}
+// 	}
+// 	company.Active = active
+// 	db.Set("company", company.Id, company)
+// 	web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id+"/feature", "Successfully saved features")
+// 	return
+// }}
 
 var companyDel = web.Route{"POST", "/cns/company/:id/del", func(w http.ResponseWriter, r *http.Request) {
 	var company Company
@@ -645,23 +478,11 @@ var companyDel = web.Route{"POST", "/cns/company/:id/del", func(w http.ResponseW
 		db.Del("document", document.Id)
 	}
 
-	// delete companyService
-	var companyService CompanyService
-	if db.TestQueryOne("company-service", &companyService, adb.Eq("companyId", `"`+company.Id+`"`)) {
-		db.Del("company-service", companyService.Id)
-	}
-
-	// delete companyServiceEmails
-	var companyServiceEmails CompanyServiceEmails
-	if db.TestQueryOne("company-service-emails", &companyServiceEmails, adb.Eq("companyId", `"`+company.Id+`"`)) {
-		db.Del("company-service-emails", companyServiceEmails.Id)
-	}
-
-	// delete companyFeatures
-	var companyFeatures CompanyFeatures
-	if db.TestQueryOne("company-features", &companyFeatures, adb.Eq("companyId", `"`+company.Id+`"`)) {
-		db.Del("company-features", companyFeatures.Id)
-	}
+	// // delete companyFeatures
+	// var companyFeatures CompanyFeatures
+	// if db.TestQueryOne("company-features", &companyFeatures, adb.Eq("companyId", `"`+company.Id+`"`)) {
+	// 	db.Del("company-features", companyFeatures.Id)
+	// }
 
 	// delete all notes
 	var notes []Note
@@ -698,19 +519,6 @@ var companyDel = web.Route{"POST", "/cns/company/:id/del", func(w http.ResponseW
 	db.Del("company", company.Id)
 
 	web.SetSuccessRedirect(w, r, "/cns/company", "Successfully deleted customer")
-	return
-}}
-
-var companyPasswordReset = web.Route{"POST", "/cns/company/:id/passwordReset", func(w http.ResponseWriter, r *http.Request) {
-	var company Company
-	if !db.Get("company", r.FormValue(":id"), &company) {
-		web.SetErrorRedirect(w, r, "/cns/company", "Error finding company")
-		return
-	}
-
-	company.Password = company.Email
-	db.Set("company", company.Id, company)
-	web.SetSuccessRedirect(w, r, "/cns/company/"+company.Id, `Successfully reset customer\'s password`)
 	return
 }}
 
@@ -854,10 +662,9 @@ var companyDriverView = web.Route{"GET", "/cns/company/:compId/driver/:id", func
 	db.All("company", &companies)
 
 	tc.Render(w, r, "driver.tmpl", web.Model{
-		"driver":       driver,
-		"company":      company,
-		"companies":    companies,
-		"driverConsts": DRIVER_CONSTS,
+		"driver":    driver,
+		"company":   company,
+		"companies": companies,
 	})
 	return
 }}
@@ -919,9 +726,6 @@ var companyDriverSave = web.Route{"POST", "/cns/driver", func(w http.ResponseWri
 	}
 	var company Company
 	db.Get("company", driver.CompanyId, &company)
-	if company.Email != "" {
-		UpdateDriverEmails(&driver, company.Email)
-	}
 	db.Set("driver", driver.Id, driver)
 	web.SetSuccessRedirect(w, r, "/cns/company/"+driver.CompanyId+"/driver/"+driver.Id, "Successfully saved driver")
 	return
@@ -1076,211 +880,3 @@ var companydriverConvert = web.Route{"POST", "/cns/company/:id/driver/convert", 
 	return
 
 }}
-
-/* --- Email Helpers --- */
-
-func UpdateDriverEmails(driver *Driver, email string) {
-	driver.LicenseExpireEmailId = updateDriverEmail(driver.LicenseExpireEmailId, "License", driver.LicenseExpire, email, -30, driver)
-	driver.MedCardExpireEmailId = updateDriverEmail(driver.MedCardExpireEmailId, "Medical Card", driver.MedCardExpiry, email, -30, driver)
-	driver.MVRExpireEmailId = updateDriverEmail(driver.MVRExpireEmailId, "MVR", driver.MVRExpiry, email, -30, driver)
-	driver.ReviewExpireEmailId = updateDriverEmail(driver.ReviewExpireEmailId, "Review", driver.ReviewExpiry, email, -30, driver)
-	driver.OneEightyExpireEmailId = updateDriverEmail(driver.OneEightyExpireEmailId, "1080", driver.OneEightyExpiry, email, -30, driver)
-}
-
-func updateDriverEmail(groupedEmailId, document, date, email string, daysAfter int, driver *Driver) string {
-	emailTime, err := time.Parse("01/02/2006", date)
-	if err != nil {
-		return ""
-	}
-	emailTime = emailTime.AddDate(0, 0, daysAfter)
-	emailTS := emailTime.Unix()
-
-	var groupedEmail GroupedEmail
-	if !db.Get("grouped-email", groupedEmailId, &groupedEmail) {
-		groupedEmail.Id = strconv.Itoa(int(time.Now().UnixNano()))
-	}
-
-	groupedEmail = GroupedEmail{
-		DataId:    driver.Id,
-		DataKey:   "drivers",
-		DataStore: "driver",
-		ValsKey:   driver.Id + "-" + document,
-		GroupId:   "driver-formexp_" + driver.CompanyId,
-	}
-
-	groupedEmail.Vals = map[string]interface{}{
-		"document": document,
-		"date":     date,
-	}
-
-	if groupedEmail.Time != emailTS {
-		groupedEmail.Sent = false
-	}
-	groupedEmail.Time = emailTS
-	db.Set("grouped-email", groupedEmailId, groupedEmail)
-	return groupedEmailId
-}
-
-func UpdateCompanyEmails(company *Company) {
-	var serviceEmails CompanyServiceEmails
-	if !db.TestQueryOne("company-service-emails", &serviceEmails, adb.Eq("companyId", `"`+company.Id+`"`)) {
-		serviceEmails.Id = strconv.Itoa(int(time.Now().UnixNano()))
-	}
-	var companyService CompanyService
-	db.TestQueryOne("company-service", &companyService, adb.Eq("companyId", `"`+company.Id+`"`))
-	if companyService.Apportion {
-		serviceEmails.ApportionOneEmailId = updateCompanyEmail(serviceEmails.ApportionOneEmailId, "Apportion 1", company.Id, companyService.ApportionDateOne, company.Email, 0, 0)
-		serviceEmails.ApportionTwoEmailId = updateCompanyEmail(serviceEmails.ApportionTwoEmailId, "Apportion 2", company.Id, companyService.ApportionDateTwo, company.Email, 0, 0)
-	} else if serviceEmails.ApportionOneEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.ApportionOneEmailId)
-		db.Del("scheduled-email", serviceEmails.ApportionTwoEmailId)
-		serviceEmails.ApportionOneEmailId = ""
-		serviceEmails.ApportionTwoEmailId = ""
-	}
-	if companyService.FuelTaxProgram {
-		serviceEmails.FuelTaxProgramEmailId = updateCompanyEmail(serviceEmails.FuelTaxProgramEmailId, "Fuel Tax Program", company.Id, "03/30", company.Email, 3, 0)
-	} else if serviceEmails.FuelTaxProgramEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.FuelTaxProgramEmailId)
-		serviceEmails.FuelTaxProgramEmailId = ""
-	}
-	if companyService.FuelTaxNY {
-		serviceEmails.FuelTaxNYEmailId = updateCompanyEmail(serviceEmails.FuelTaxNYEmailId, "Fuel Tax NY Program", company.Id, "03/30", company.Email, 3, 0)
-	} else if serviceEmails.FuelTaxNYEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.FuelTaxNYEmailId)
-		serviceEmails.FuelTaxNYEmailId = ""
-	}
-	if companyService.FuelTaxKY {
-		serviceEmails.FuelTaxKYEmailId = updateCompanyEmail(serviceEmails.FuelTaxKYEmailId, "Fuel Tax KY Program", company.Id, "03/30", company.Email, 3, 0)
-	} else if serviceEmails.FuelTaxNYEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.FuelTaxNYEmailId)
-		serviceEmails.FuelTaxKYEmailId = ""
-	}
-	if companyService.FuelTaxNM {
-		serviceEmails.FuelTaxNMEmailId = updateCompanyEmail(serviceEmails.FuelTaxNMEmailId, "Fuel Tax NM Program", company.Id, "03/30", company.Email, 3, 0)
-	} else if serviceEmails.FuelTaxNMEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.FuelTaxNMEmailId)
-		serviceEmails.FuelTaxNMEmailId = ""
-	}
-	if companyService.DrugConsortium {
-		serviceEmails.DrugConsortiumEmailId = updateCompanyEmail(serviceEmails.DrugConsortiumEmailId, "Drug Consortium", company.Id, companyService.DrugConsortiumDate, company.Email, 0, 0)
-	} else if serviceEmails.DrugConsortiumEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.DrugConsortiumEmailId)
-		serviceEmails.DrugConsortiumEmailId = ""
-	}
-	if companyService.DriverFileManagement {
-		serviceEmails.DriverFileManagmentEmailId = updateCompanyEmail(serviceEmails.DriverFileManagmentEmailId, "Driver File Managment", company.Id, companyService.DriverFileManagementDate, company.Email, 0, 0)
-	} else if serviceEmails.DriverFileManagmentEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.DriverFileManagmentEmailId)
-		serviceEmails.DriverFileManagmentEmailId = ""
-	}
-	if companyService.DOTUpdate {
-		serviceEmails.DOTUpdateEmailId = updateCompanyEmail(serviceEmails.DOTUpdateEmailId, "DOT Update", company.Id, companyService.DOTUpdateDate, company.Email, 0, 0)
-	} else if serviceEmails.DOTUpdateEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.DOTUpdateEmailId)
-		serviceEmails.DOTUpdateEmailId = ""
-	}
-	if companyService.TwentyTwoNinety {
-		serviceEmails.TwentyTwoNinetyEmailId = updateCompanyEmail(serviceEmails.TwentyTwoNinetyEmailId, "2290", company.Id, "06/01", company.Email, 0, 1)
-	} else if serviceEmails.TwentyTwoNinetyEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.TwentyTwoNinetyEmailId)
-		serviceEmails.TwentyTwoNinetyEmailId = ""
-	}
-	if companyService.UCR {
-		serviceEmails.UCREmailId = updateCompanyEmail(serviceEmails.UCREmailId, "UCR", company.Id, "10/01", company.Email, 0, 1)
-	} else if serviceEmails.UCREmailId != "" {
-		db.Del("scheduled-email", serviceEmails.UCREmailId)
-		serviceEmails.UCREmailId = ""
-	}
-	if companyService.LogAuditing {
-		serviceEmails.LogAuditingEmailId = updateCompanyEmail(serviceEmails.LogAuditingEmailId, "Log Auditing", company.Id, "01/07", company.Email, 1, 0)
-	} else if serviceEmails.LogAuditingEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.LogAuditingEmailId)
-		serviceEmails.LogAuditingEmailId = ""
-	}
-	if companyService.CSAService {
-		serviceEmails.CSAServiceEmailId = updateCompanyEmail(serviceEmails.CSAServiceEmailId, "CSA Service", company.Id, companyService.CSAServiceDate, company.Email, 0, 0)
-	} else if serviceEmails.CSAServiceEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.CSAServiceEmailId)
-		serviceEmails.CSAServiceEmailId = ""
-	}
-	if companyService.NY {
-		serviceEmails.NYEmailId = updateCompanyEmail(serviceEmails.NYEmailId, "NY", company.Id, companyService.NYDate, company.Email, 0, 0)
-	} else if serviceEmails.NYEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.NYEmailId)
-		serviceEmails.NYEmailId = ""
-	}
-	if companyService.GPS {
-		serviceEmails.GPSEmailId = updateCompanyEmail(serviceEmails.GPSEmailId, "GPS", company.Id, companyService.GPSDate, company.Email, 0, 0)
-	} else if serviceEmails.GPSEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.GPSEmailId)
-		serviceEmails.GPSEmailId = ""
-	}
-	if companyService.Training {
-		serviceEmails.TrainingEmailId = updateCompanyEmail(serviceEmails.TrainingEmailId, "Training", company.Id, companyService.TrainingDate, company.Email, 0, 0)
-	} else if serviceEmails.TrainingEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.TrainingEmailId)
-		serviceEmails.TrainingEmailId = ""
-	}
-	if companyService.IFTARenewal {
-		serviceEmails.IFTARenewalEmailId = updateCompanyEmail(serviceEmails.IFTARenewalEmailId, "TFTA Renewal", company.Id, "11/15", company.Email, 0, 1)
-	} else if serviceEmails.IFTARenewalEmailId != "" {
-		db.Del("scheduled-email", serviceEmails.IFTARenewalEmailId)
-		serviceEmails.IFTARenewalEmailId = ""
-	}
-	db.Set("company-service-emails", serviceEmails.Id, serviceEmails)
-}
-
-func updateCompanyEmail(scheduledEmailId, document, companyId, date, email string, intervalMonth, intervalYear int) string {
-
-	//emailTime, _ := time.Parse("01/02/2006", date)
-
-	emailTime, err := GetCompanyServiceDate(date)
-	if err != nil {
-		return ""
-	}
-	emailTS := emailTime.Unix()
-	var scheduledEmail ScheduledEmail
-	if !db.Get("scheduled-email", scheduledEmailId, &scheduledEmail) {
-		scheduledEmailId = strconv.Itoa(int(time.Now().UnixNano()))
-		scheduledEmail = ScheduledEmail{
-			Id: scheduledEmailId,
-			Data: map[string]Data{
-				"company": Data{
-					Key: "company",
-					Ids: []string{companyId},
-				},
-			},
-			Vals: map[string]interface{}{
-				"document": document,
-				"date":     date,
-			},
-			Email: mg.Email{
-				To:      []string{email},
-				From:    "no-reply@test.com",
-				Subject: "Document Expiring",
-			},
-			Template: "emails/company-exp.tmpl",
-		}
-		if intervalMonth != 0 && intervalYear != 0 {
-			scheduledEmail.Reschedule = true
-			scheduledEmail.IntervalMonth = intervalMonth
-			scheduledEmail.IntervalYear = intervalYear
-		}
-	}
-	scheduledEmail.Time = emailTS
-	db.Set("scheduled-email", scheduledEmailId, scheduledEmail)
-	return scheduledEmailId
-}
-
-func GetCompanyServiceDate(date string) (time.Time, error) {
-	now := time.Now()
-	service, err := time.Parse("01/02/2006", date+"/"+strconv.Itoa(now.Year()))
-	if err != nil {
-		fmt.Printf("err: %v\n", err)
-		return service, err
-	}
-	if service.Month() < now.Month() || (service.Month() == now.Month() && service.Day() <= now.Day()) {
-		service = service.AddDate(1, 0, 0)
-	}
-	return service, nil
-}

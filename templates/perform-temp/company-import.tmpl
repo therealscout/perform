@@ -26,15 +26,13 @@
                         <div class="panel panel-default p-0">
                             <div class="panel-body p-0">
                                 <ul class="nav nav-tabs profile-tabs">
-                                    <li><a href="/cns/company/{{ .company.Id }}">Customer Center</a></li>
-                                    <li><a href="/cns/company/{{ .company.Id }}/service">Service</a></li>
-                                    <li><a href="/cns/company/{{ .company.Id }}/vehicle">Vehicles</a></li>
-                                    <li><a href="/cns/company/{{ .company.Id }}/driver">Drivers</a></li>
+                                    <li><a href="/cns/company/{{ .company.Id }}">Company Center</a></li>
+                                    <li><a href="/cns/company/{{ .company.Id }}/driver">Employees</a></li>
                                     <li><a href="/cns/company/{{ .company.Id }}/form">Forms</a></li>
                                     <li><a href="/cns/company/{{ .company.Id }}/file">Files</a></li>
                                     <li><a href="/cns/company/{{ .company.Id }}/notification">Notifications</a></li>
-                                    <li><a href="/cns/company/{{ .company.Id }}/feature">Features</a></li>
-                                    <li><a href="/cns/company/{{ .company.Id }}/violation">Stats</a></li>
+                                    <!-- <li><a href="/cns/company/{{ .company.Id }}/feature">Features</a></li> -->
+                                    <!-- <li><a href="/cns/company/{{ .company.Id }}/violation">Stats</a></li> -->
                                     {{ if eq .session.ROLE "ADMIN" "DEVELOPER" }}
                                         <li><a href="/admin/company/{{ .company.Id }}/task">Tasks</a></li>
                                     {{ end }}

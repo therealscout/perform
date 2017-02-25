@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/cagnosolutions/adb"
-	"github.com/cagnosolutions/mg"
 	"github.com/cagnosolutions/web"
 )
 
@@ -20,14 +19,12 @@ var tc *web.TmplCache
 var mx *web.Mux
 var db *adb.DB = adb.NewDB()
 
-var MG_DOMAIN = "api.mailgun.net/v3/sandbox73d66ccb60f948708fcaf2e2d1b3cd4c.mailgun.org"
-var MG_KEY = "key-173701b40541299bd3b7d40c3ac6fd43"
+// var MG_DOMAIN = "api.mailgun.net/v3/sandbox73d66ccb60f948708fcaf2e2d1b3cd4c.mailgun.org"
+// var MG_KEY = "key-173701b40541299bd3b7d40c3ac6fd43"
 
 func init() {
 	db.AddStore("employee")
 	db.AddStore("company")
-	db.AddStore("company-service")
-	db.AddStore("company-service-emails")
 	db.AddStore("driver")
 	db.AddStore("vehicle")
 	db.AddStore("document")
@@ -40,8 +37,6 @@ func init() {
 	db.AddStore("notification")
 	db.AddStore("company-features")
 	db.AddStore("meta")
-	db.AddStore("violation-cache")
-	db.AddStore("safer-cache")
 	db.AddStore("task")
 
 	// ParseCSVDriverFile("./driver-file.csv")
@@ -78,7 +73,7 @@ func init() {
 	mx.AddSecureRoutes(EMPLOYEE, index)
 
 	// email routes
-	mx.AddSecureRoutes(ADMIN, emailTemplateAll, emailTemplateView, emailTemplateSave, emailTest, emailTestSend)
+	mx.AddSecureRoutes(ADMIN, emailTemplateAll, emailTemplateView, emailTemplateSave, emailTest)
 
 	// employee management routes
 	mx.AddSecureRoutes(ADMIN, employeeAll, employeeView, employeeSave, employeeDel, adminEmployeeTask, adminEmployeeTaskIncomplete, adminEmployeeTaskComplete, adminCompanyTask, adminCompanyTaskIncomplete, adminCompanyTaskComplete)
@@ -87,10 +82,9 @@ func init() {
 	mx.AddSecureRoutes(EMPLOYEE, saveHomePage, cnsHome, cnsAction, cnsTask, cnsTaskComplete, cnsTaskIncomplete, cnsTaskMarkStart, cnsTaskMarkComplete, cnsTaskMarkNote)
 
 	// company management routes
-	mx.AddSecureRoutes(EMPLOYEE, companyAll, companyView, companySave, companyNoteSave, companyServiceView, companyServiceSave, companyServiceNotify, companyPasswordReset)
+	mx.AddSecureRoutes(EMPLOYEE, companyAll, companyView, companySave, companyNoteSave)
 	mx.AddSecureRoutes(EMPLOYEE, companyFormAll, companyFormAdd, companyFormDel, companyFormArchive, companyFileAll)
-	mx.AddSecureRoutes(EMPLOYEE, companyNotification, companyNotificationAdd, companyNotificaltionDel, companyFeature, companyFeatureSave, companyViolation, companySafer)
-	mx.AddSecureRoutes(EMPLOYEE, companyGlobalNotifyLastSet, companyGlobalNotifySet, companyGlobalNotifyLastReset, companyGlobalNotifyReset)
+	mx.AddSecureRoutes(EMPLOYEE, companyNotification, companyNotificationAdd, companyNotificaltionDel)
 	mx.AddSecureRoutes(ADMIN, companyDel)
 
 	mx.AddSecureRoutes(ALL, companyFileApi, companyFileUpload, companyFileView, companyFolderNew, companyFileDel, companyFileMove)
@@ -101,7 +95,6 @@ func init() {
 
 	// driver management routes
 	mx.AddSecureRoutes(EMPLOYEE, companyDriverAll, companyDriverImport, companyDriverImportUpload, companydriverConvert, companyDriverView, companyDriverSave, companyDriverFileAll, companyDriverFormAll, companyDriverDel, companyDriverTransfer)
-	mx.AddSecureRoutes(EMPLOYEE, driverGlobalNotifyLastSet, driverGlobalNotifySet)
 	mx.AddSecureRoutes(ALL, driverFileUpload, driverFileView, driverFileDel, driverFormAdd)
 
 	// document management routes
@@ -112,16 +105,16 @@ func init() {
 
 	// development routes
 	mx.AddSecureRoutes(DEVELOPER, devComments, stats)
-	mx.AddRoutes(makeUsers, GetComment, PostComent, testDB, transferModels)
+	mx.AddRoutes(makeUsers, GetComment, PostComent)
 	mx.AddRoutes(httpError)
 
 	//customer routes
-	mx.AddRoutes(customerLogin, customerLoginPost, customerLogout)
-	mx.AddSecureRoutes(COMPANY, customerHome, customerInfo, customerDriver, customerVehicle, customerForm, customerPasswordSave)
-	mx.AddSecureRoutes(COMPANY, customerVehicleView, customerDriverView, customerDriverForm, customerDriverFile)
-	mx.AddSecureRoutes(COMPANY, customerFile, customerVehicleFile, customerViolation, customerSafer)
-
-	mx.AddSecureRoutes(ALL, customerViolationRestSave, customerSaferRestSave)
+	// mx.AddRoutes(customerLogin, customerLoginPost, customerLogout)
+	// mx.AddSecureRoutes(COMPANY, customerHome, customerInfo, customerDriver, customerVehicle, customerForm, customerPasswordSave)
+	// mx.AddSecureRoutes(COMPANY, customerVehicleView, customerDriverView, customerDriverForm, customerDriverFile)
+	// mx.AddSecureRoutes(COMPANY, customerFile, customerVehicleFile, customerViolation, customerSafer)
+	//
+	// mx.AddSecureRoutes(ALL, customerViolationRestSave, customerSaferRestSave)
 
 	// misc routes
 	mx.AddRoutes(files, filesApi, newFolder)
@@ -141,13 +134,12 @@ func init() {
 
 	defaultUsers()
 
-	mg.SetCredentials(MG_DOMAIN, MG_KEY)
+	// mg.SetCredentials(MG_DOMAIN, MG_KEY)
 
 }
 
 // main http listener
 func main() {
-	go SendToday(6)
 	fmt.Println("DID YOU REGISTER ANY NEW ROUTES?")
 	log.Fatal(http.ListenAndServe(":8080", mx))
 }

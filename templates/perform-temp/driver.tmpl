@@ -26,7 +26,7 @@
                     <div class="col-sm-12">
 
                         <p class="lead">
-                            Driver: {{ if .driver.Id }}{{ .driver.FirstName }} {{ .driver.LastName}}{{ else }}NEW{{ end }}
+                            Employee: {{ if .driver.Id }}{{ .driver.FirstName }} {{ .driver.LastName}}{{ else }}NEW{{ end }}
                             {{ if .driver.Id }}{{ if .driver.CompanyId }}<a href="/cns/company/{{ .driver.CompanyId }}/driver" class="pull-right return">Return to Customer</a>{{ end }}{{ end }}
                         </p>
 
